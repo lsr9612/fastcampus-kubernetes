@@ -30,7 +30,7 @@ spec:
         fieldRef:
           fieldPath: status.hostIP
     - name: STUDENT_NAME
-      value: 본인이름
+      value: 이승록
     - name: GREETING
       value: 쿠버네티스 입문 강의에 오신 것을 환영합니다. $(STUDENT_NAME)님!
     resources:

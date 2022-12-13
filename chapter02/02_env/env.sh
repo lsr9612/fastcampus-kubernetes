@@ -1,6 +1,7 @@
 # Pod 생성
-kubectl apply -f hello-app.yaml
+kubectl apply -f ./completed/hello-app.yaml
 
+sleep 5
 # Pod 실행 및 IP 확인
 kubectl get pod -o wide
 kubectl get pod/hello-app -o json
@@ -19,8 +20,8 @@ kubectl exec hello-app -- netstat -an
 kubectl port-forward hello-app 8080:8080
 
 # HTTP Server 응답 확인  (웹브라우저 or curl)
-curl -v localhost:8080
+curl -v localhost:8080 || kubectl delete pod --all
 
 # Pod 종료
-kubectl delete pod --all
+#kubectl delete pod --all
 # kubectl delete pod hello-pod
