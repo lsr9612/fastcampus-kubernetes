@@ -8,6 +8,35 @@
 # 컨테이너 이름/포트: my-app(8080)
 # 컨테이너 레이블: app=my-app, project=fastcampus, env=production, version: v1 
 # 도커 이미지: yoonjeong/my-app:1.0
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  labels:
+    app: my-app
+spec:
+  replicas: 5
+  selector:
+    matchLables:
+      app: my-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 2
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: my-app
+        env: production
+        project: fastcampus
+    spec:
+      containers:
+      - name: my-app
+        image: yoonjeong/my-app:1.0
+        ports:
+          port:  8080
+          protocol: TCP
         resources:
           limits:
             memory: "64Mi"
