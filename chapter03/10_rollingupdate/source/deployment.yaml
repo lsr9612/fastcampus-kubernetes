@@ -30,10 +30,11 @@ spec:
         app: my-app
         env: production
         project: fastcampus
+        version: v2
     spec:
       containers:
       - name: my-app
-        image: yoonjeong/my-app:1.0
+        image: yoonjeong/my-app:2.0
         ports:
         - containerPort: 8080
         resources:
