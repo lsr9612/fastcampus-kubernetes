@@ -1,6 +1,6 @@
 # Service API 버전: v1
 # Service 이름: order
-# Service 네임스페이스: snackbar
+# Service 네임스페이스: snackbar 
 # Service 레이블: service=order, project=snackbar
 # Service 타입: ClusterIP
 # Service 셀렉터: service=order, project=snackbar
