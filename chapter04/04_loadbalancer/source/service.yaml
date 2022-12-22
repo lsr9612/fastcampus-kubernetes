@@ -6,7 +6,23 @@
 # Service 셀렉터: service=order, project=snackbar
 # Service 포트: 80
 # 컨테이너 포트: 8080
-
+kind: Service
+apiVersion: v1
+metadata:
+  name:  order
+  namespace: snackbar
+  labels:
+   service: order
+   project: snackbar
+spec:
+  selector:
+    service: order
+    project: snackbar
+  type:  LoadBalancer
+  ports:
+  - name:  order-service
+    port:  80
+    targetPort:  8080
 ---
 
 # Service API 버전: v1
@@ -17,7 +33,23 @@
 # Service 셀렉터: service=payment, project=snackbar
 # Service 포트: 80
 # 컨테이너 포트: 8080
-
+kind: Service
+apiVersion: v1
+metadata:
+  name:  payment
+  namespace: snackbar
+  labels:
+   service: payment
+   project: snackbar
+spec:
+  selector:
+    service: payment
+    project: snackbar
+  type:  ClusterIP
+  ports:
+  - name:  payment-service
+    port:  80
+    targetPort:  8080
 ---
 
 apiVersion: apps/v1
@@ -75,6 +107,11 @@ spec:
       containers:
       - name: payment
         image: yoonjeong/payment:1.0
+        env:
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
         ports:
         - containerPort: 8080
         resources:
