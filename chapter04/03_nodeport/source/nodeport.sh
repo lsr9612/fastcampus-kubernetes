@@ -1,4 +1,5 @@
 # NodePort 타입의 order 서비스 생성, ClusterIP 타입의 payment 서비스 생성
+kubectl create ns snackbar
 kubectl apply -f service.yaml
 
 # snackbar 네임스페이스의 project=snackbar 레이블을 가진 모든 리소스 조회 - Service의 NodePort 확인
@@ -11,10 +12,10 @@ kubectl get svc -l project=snackbar -n snackbar -o wide
 kubectl get endpoints -n snackbar
 
 # ClusterIP:NodePort로는 로컬머신에서 접근 불가
-curl 10.80.14.146:32339
+curl 10.80.14.146:31593
 
 # GCP 포트 허용 정책 설정 - order 서비스의 NodePort에 대한 방화벽 해제 
-gcloud compute firewall-rules create order --allow tcp:32339
+gcloud compute firewall-rules create order --allow tcp:31593
 
 # 프로젝트가 설정되어 있지 않다고 메시지가 뜨는 경우
 gcloud config set project <project-id>
