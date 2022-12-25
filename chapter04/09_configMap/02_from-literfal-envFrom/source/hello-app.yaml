@@ -1,16 +1,22 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: hello-app
+  name: hello-app-1
   labels:
-    name: hello-app
+    name: hello-app-1
 spec:
   containers:
-  - name: hello-app
+  - name: hello-app-1
     image: yoonjeong/hello-app:1.0
     ports:
     - containerPort: 8080
-    # 여기에 환경변수 작성 
+    # 여기에 환경변수 작성
+    envFrom:
+      - configMapRef:
+          name: greeting-config
+    env:
+      - name: GREETING
+        value: $(MESSAGE) ! $(STUDENT_NAME)
     resources:
       limits:
         memory: "64Mi"
